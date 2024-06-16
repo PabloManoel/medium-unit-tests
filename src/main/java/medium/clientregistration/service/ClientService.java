@@ -38,18 +38,8 @@ public class ClientService {
             throw new Exception("Client already exists");
         }
 
-        if (clientDTO.document() == null) {
-            throw new Exception("Document field is mandatory");
-        }
-
-        var isValidDocumentType = Arrays.stream(DocumentType.values())
-                .anyMatch(value -> value.name().equals(clientDTO.documentType()));
-
-        if (!isValidDocumentType) {
-            throw new Exception("Document type not valid");
-        }
-
         var clientEntity = toEntity(clientDTO);
+
         clientRepository.save(clientEntity);
     }
 
